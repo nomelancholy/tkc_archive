@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/nomelancholy/t.k.c.-automation/issues"
   },
-  "homepage": "https://github.com/nomelancholy/t.k.c.-automation#readme"
+  "homepage": "https://github.com/nomelancholy/t.k.c.-automation#readme",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0-beta.1"
+  },
+  "type": "module"
 }
