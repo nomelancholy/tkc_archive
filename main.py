@@ -11,10 +11,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome()
+load_dotenv(find_dotenv())
 
 def naver_process():
     driver.get("http://naver.com/")
-    load_dotenv(find_dotenv())
 
     NAVER_ID = os.environ.get("NAVER_ID")
     NAVER_PW = os.environ.get("NAVER_PW")
@@ -66,11 +66,20 @@ def naver_process():
 def dct_process():
     driver.get("https://dctribe.com/")
 
+    DCT_ID = os.environ.get("DCT_ID")
+    DCT_PW = os.environ.get("DCT_PW")
+
 def hiphople_process():
     driver.get("https://hiphople.com/")
 
+    HIPHOPLE_ID = os.environ.get("HIPHOPLE_ID")
+    HIPHOPLE_PW = os.environ.get("HIPHOPLE_PW")
+
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
+
+    O_U_ID = os.environ.get("O_U_ID")
+    O_U_PW = os.environ.get("O_U_PW")
 
 naver_process()
 # dct_process()
