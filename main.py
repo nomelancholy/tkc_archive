@@ -48,7 +48,7 @@ def naver_process():
     pw_field.click()
     pyperclip.copy(NAVER_PW)
     pw_field.send_keys(Keys.CONTROL, 'v')
-    time.sleep(2)
+    time.sleep(1.5)
 
     submit_button = driver.find_element_by_id("log.login")
     submit_button.click()
@@ -60,7 +60,33 @@ def naver_process():
     except:
         driver.quit()
 
-    driver.get('https://blog.naver.com/starmekey')
+    driver.get('https://blog.naver.com/starmekey/postwrite')
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'se-help-panel-close-button'))
+        )
+    except:
+        driver.quit()
+
+    time.sleep(2)
+
+    popup_close_button = driver.find_element_by_class_name('se-help-panel-close-button')
+    popup_close_button.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, 'SE-07f5820a-3947-4e98-97dd-cfce58671d43'))
+        )
+    except:
+        driver.quit()
+
+    # time.sleep(3)
+
+    # driver.execute_script("document.getElementsById('SE-07f5820a-3947-4e98-97dd-cfce58671d43')[0].value=\'"+'테스트'+"\'")
+    # title_field = driver.find_element_by_id('SE-07f5820a-3947-4e98-97dd-cfce58671d43')
+
+    # title_field.send_keys('자동화 귀찮다')
 
 
 def dct_process():
@@ -81,8 +107,9 @@ def o_u_process():
     O_U_ID = os.environ.get("O_U_ID")
     O_U_PW = os.environ.get("O_U_PW")
 
-naver_process()
-# dct_process()
+
+# naver_process()
+dct_process()
 # hiphople_process()
 # o_u_process()
 
