@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 driver = webdriver.Chrome()
 load_dotenv(find_dotenv())
@@ -101,6 +102,48 @@ def hiphople_process():
     HIPHOPLE_ID = os.environ.get("HIPHOPLE_ID")
     HIPHOPLE_PW = os.environ.get("HIPHOPLE_PW")
 
+    popup_load_btn = driver.find_element_by_class_name('tg_btn')
+    popup_load_btn.click()
+
+    id_field = driver.find_element_by_id("uid")
+    id_field.send_keys(HIPHOPLE_ID)
+
+    pw_field = driver.find_element_by_id("upw")
+    pw_field.send_keys(HIPHOPLE_PW)
+
+    login_btn = driver.find_element_by_class_name('login_btn')
+    login_btn.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.LINK_TEXT, 'LOGOUT'))
+        )
+    except:
+        driver.quit()
+
+    driver.get("https://hiphople.com/fboard")
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id=\"aplosboard\"]/div[4]/div[2]/a[2]"))
+        )
+    except:
+        driver.quit()
+
+    write_btn = driver.find_element_by_xpath("//*[@id=\"aplosboard\"]/div[4]/div[2]/a[2]")
+
+    write_btn.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, "cmd_reg"))
+        )
+    except:
+        driver.quit()
+
+    category_select = Select(driver.find_element_by_id("category"))
+    category_select.select_by_visible_text("음악")
+
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
 
@@ -109,8 +152,8 @@ def o_u_process():
 
 
 # naver_process()
-dct_process()
-# hiphople_process()
+# dct_process()
+hiphople_process()
 # o_u_process()
 
 
