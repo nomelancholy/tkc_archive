@@ -144,6 +144,12 @@ def hiphople_process():
     category_select = Select(driver.find_element_by_id("category"))
     category_select.select_by_visible_text("음악")
 
+    title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
+    title_field.send_keys("제목 테스트")
+
+    body_field = driver.find_element_by_xpath("/html/body/p")
+    body_field.send_keys("안될 거 같은데")
+
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
 
