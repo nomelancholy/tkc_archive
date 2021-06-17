@@ -153,13 +153,37 @@ def hiphople_process():
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
 
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="id"]'))
+        )
+    except:
+        driver.quit()
+
     O_U_ID = os.environ.get("O_U_ID")
     O_U_PW = os.environ.get("O_U_PW")
 
+    id_field = driver.find_element_by_xpath('//*[@id="id"]')
+    id_field.send_keys(O_U_ID)
+
+    pw_field = driver.find_element_by_id("passwd")
+    pw_field.send_keys(O_U_PW)
+
+    login_button = driver.find_element_by_class_name("login_btn")
+    login_button.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="login_user_menu"]/span'))
+        )
+    except:
+        driver.quit()
+
+    driver.get("http://www.todayhumor.co.kr/board/list.php?table=music")
 
 # naver_process()
 # dct_process()
-hiphople_process()
-# o_u_process()
+# hiphople_process()
+o_u_process()
 
 
