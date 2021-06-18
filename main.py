@@ -179,7 +179,17 @@ def o_u_process():
     except:
         driver.quit()
 
-    driver.get("http://www.todayhumor.co.kr/board/list.php?table=music")
+    driver.get("http://www.todayhumor.co.kr/board/write.php?table=music")
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, 'subject'))
+        )
+    except:
+        driver.quit()
+
+    title_field = driver.find_element_by_id('subject')
+    title_field.send_keys("제목 테스트")
 
 # naver_process()
 # dct_process()
