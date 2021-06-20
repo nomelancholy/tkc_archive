@@ -96,6 +96,24 @@ def dct_process():
     DCT_ID = os.environ.get("DCT_ID")
     DCT_PW = os.environ.get("DCT_PW")
 
+    id_field = driver.find_element_by_id("user_id")
+    id_field.send_keys(DCT_ID)
+
+    pw_field = driver.find_element_by_id("passwd")
+    pw_field.send_keys(DCT_PW)
+
+    login_button = driver.find_element_by_xpath('//*[@id="login"]/form/div[3]/input')
+    login_button.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, 'account'))
+        )
+    except:
+        driver.quit()
+
+    driver.get("https://dctribe.com/0/zboard.php?id=audio")
+
 def hiphople_process():
     driver.get("https://hiphople.com/")
 
@@ -192,8 +210,8 @@ def o_u_process():
     title_field.send_keys("제목 테스트")
 
 # naver_process()
-# dct_process()
+dct_process()
 # hiphople_process()
-o_u_process()
+# o_u_process()
 
 
