@@ -114,6 +114,15 @@ def dct_process():
 
     driver.get("https://dctribe.com/0/zboard.php?id=audio")
 
+    write_button = driver.find_element_by_xpath('//*[@id="bottom"]/div[2]/a')
+    write_button.click()
+
+    category_select = Select(driver.find_element_by_xpath('//*[@id="post"]/form/div[1]/select'))
+    category_select.select_by_visible_text("foreign")
+
+    title_field = driver.find_element_by_class_name('post_input')
+    title_field.send_keys("테스트")
+
 def hiphople_process():
     driver.get("https://hiphople.com/")
 
