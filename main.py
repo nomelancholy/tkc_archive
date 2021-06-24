@@ -233,9 +233,18 @@ def o_u_process():
     title_field = driver.find_element_by_id('subject')
     title_field.send_keys("제목 테스트")
 
+    iframe = driver.find_element_by_class_name('cheditor-editarea')
+
+    driver.switch_to.frame(iframe)
+
+    editor = driver.find_element_by_xpath('/html/body/p')
+    editor.send_keys('test')
+
+    driver.switch_to.default_content()
+
 # naver_process()
 # dct_process()
-hiphople_process()
-# o_u_process()
+# hiphople_process()
+o_u_process()
 
 
