@@ -123,6 +123,15 @@ def dct_process():
     title_field = driver.find_element_by_class_name('post_input')
     title_field.send_keys("테스트")
 
+    iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
+
+    driver.switch_to.frame(iframe)
+
+    editor = driver.find_element_by_xpath('/html/body')
+    editor.send_keys('test')
+
+    driver.switch_to.default_content()
+    
 def hiphople_process():
     driver.get("https://hiphople.com/")
 
