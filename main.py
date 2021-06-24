@@ -60,27 +60,27 @@ def naver_process():
         )
     except:
         driver.quit()
-
-    driver.get('https://blog.naver.com/starmekey/postwrite')
-
-    try:
-        element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'se-help-panel-close-button'))
-        )
-    except:
-        driver.quit()
-
-    time.sleep(2)
-
-    popup_close_button = driver.find_element_by_class_name('se-help-panel-close-button')
-    popup_close_button.click()
-
-    try:
-        element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.ID, 'SE-07f5820a-3947-4e98-97dd-cfce58671d43'))
-        )
-    except:
-        driver.quit()
+    #
+    # driver.get('https://blog.naver.com/starmekey/postwrite')
+    #
+    # try:
+    #     element = WebDriverWait(driver, 5).until(
+    #         EC.presence_of_element_located((By.CLASS_NAME, 'se-help-panel-close-button'))
+    #     )
+    # except:
+    #     driver.quit()
+    #
+    # time.sleep(2)
+    #
+    # popup_close_button = driver.find_element_by_class_name('se-help-panel-close-button')
+    # popup_close_button.click()
+    #
+    # try:
+    #     element = WebDriverWait(driver, 5).until(
+    #         EC.presence_of_element_located((By.ID, 'SE-07f5820a-3947-4e98-97dd-cfce58671d43'))
+    #     )
+    # except:
+    #     driver.quit()
 
     # time.sleep(3)
 
@@ -89,6 +89,17 @@ def naver_process():
 
     # title_field.send_keys('자동화 귀찮다')
 
+    # driver.get('https://cafe.naver.com/rapsup')
+    #
+    # tk_link = driver.find_element_by_link_text('Take Knowledge')
+    #
+    # tk_link.click()
+
+    driver.get('https://cafe.naver.com/ca-fe/cafes/14371899/menus/571/articles/write?boardType=L')
+
+    cafe_title_field = driver.find_element_by_class_name('textarea_input')
+    cafe_title_field.click()
+    cafe_title_field.send_keys('test')
 
 def dct_process():
     driver.get("https://dctribe.com/")
@@ -242,9 +253,9 @@ def o_u_process():
 
     driver.switch_to.default_content()
 
-# naver_process()
+naver_process()
 # dct_process()
 # hiphople_process()
-o_u_process()
+# o_u_process()
 
 
