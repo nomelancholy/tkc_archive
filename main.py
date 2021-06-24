@@ -183,8 +183,14 @@ def hiphople_process():
     title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
     title_field.send_keys("제목 테스트")
 
-    body_field = driver.find_element_by_xpath("/html/body/p")
-    body_field.send_keys("안될 거 같은데")
+    iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
+
+    driver.switch_to.frame(iframe)
+
+    editor = driver.find_element_by_xpath('/html/body/p')
+    editor.send_keys('test')
+
+    driver.switch_to.default_content()
 
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
@@ -228,8 +234,8 @@ def o_u_process():
     title_field.send_keys("제목 테스트")
 
 # naver_process()
-dct_process()
-# hiphople_process()
+# dct_process()
+hiphople_process()
 # o_u_process()
 
 
