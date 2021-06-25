@@ -14,6 +14,13 @@ from selenium.webdriver.support.ui import Select
 driver = webdriver.Chrome()
 load_dotenv(find_dotenv())
 
+TITLE = os.environ.get("TITLE")
+FULL_TITLE = "Take Knowledge's Choice #1834. "+ TITLE
+YOUTUBE_LINK = os.environ.get("YOUTUBE_LINK")
+IFRAME_LINK = '<iframe width="560" height="315" src="'+YOUTUBE_LINK+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+COMMENT = os.environ.get("COMMENT")
+LINK = os.environ.get("LINK")
+
 def naver_process():
     driver.get("http://naver.com/")
 
@@ -192,16 +199,20 @@ def hiphople_process():
     category_select.select_by_visible_text("음악")
 
     title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
-    title_field.send_keys("제목 테스트")
+    title_field.send_keys(FULL_TITLE)
+
+    html_code_button = driver.find_element_by_id('cke_40')
+    html_code_button.click()
 
     iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
-
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body/p')
-    editor.send_keys('test')
+    editor.send_keys(COMMENT)
+    editor.send_keys(LINK)
 
     driver.switch_to.default_content()
+    html_code_button.click()
 
 def o_u_process():
     driver.get("http://www.todayhumor.co.kr/")
@@ -242,20 +253,29 @@ def o_u_process():
         driver.quit()
 
     title_field = driver.find_element_by_id('subject')
-    title_field.send_keys("제목 테스트")
+    title_field.send_keys(TITLE)
 
-    iframe = driver.find_element_by_class_name('cheditor-editarea')
-
+    iframe = driver.find_element_by_tag_name('iframe')
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body/p')
-    editor.send_keys('test')
+
+    html_switch_button = driver.find_element_by_class_name('cheditor-tab-code-off')
+    html_switch_button.click()
+
+    editor.send_keys(TITLE)
+    editor.send_keys("\n")
+    editor.send_keys(FULL_TITLE)
+    editor.send_keys("\n")
+    editor.send_keys(COMMENT)
+    editor.send_keys("\n")
+    editor.send_keys(LINK)
 
     driver.switch_to.default_content()
 
-naver_process()
+# naver_process()
 # dct_process()
-# hiphople_process()
+hiphople_process()
 # o_u_process()
 
 
