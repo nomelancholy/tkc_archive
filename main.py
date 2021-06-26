@@ -194,8 +194,12 @@ def hiphople_process():
     except:
         driver.quit()
 
+
     category_select = Select(driver.find_element_by_id("category"))
     category_select.select_by_visible_text("음악")
+
+    text = open("C:\\tkc.txt", 'rt', encoding='UTF8')
+    print(text.readline())
 
     title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
     title_field.send_keys(FULL_TITLE)
