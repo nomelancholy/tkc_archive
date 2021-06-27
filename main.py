@@ -199,7 +199,7 @@ def hiphople_process():
     category_select.select_by_visible_text("음악")
 
     text = open("C:\\tkc.txt", 'rt', encoding='UTF8')
-    print(text.readline())
+    print(text.read())
 
     title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
     title_field.send_keys(FULL_TITLE)
