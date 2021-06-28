@@ -14,12 +14,15 @@ from selenium.webdriver.support.ui import Select
 driver = webdriver.Chrome()
 load_dotenv(find_dotenv())
 
-# TITLE = os.environ.get("TITLE")
-# FULL_TITLE = "Take Knowledge's Choice #1834. "+ TITLE
-# YOUTUBE_LINK = os.environ.get("YOUTUBE_LINK")
-# IFRAME_LINK = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+YOUTUBE_LINK+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-# COMMENT = os.environ.get("COMMENT")
-# LINK = os.environ.get("LINK")
+text = open("D:\\T.K.C\\take knowledge's choice.txt", 'rt', encoding='UTF8')
+
+list = text.read().split('\\')
+
+FULL_TITLE = list[0][:-1]
+TITLE = FULL_TITLE.split('.', maxsplit=1)[1][:-1]
+CONTENT = list[1][:-1]
+YOUTUBE_LINK = list[2][:-1]
+IFRAME_LINK = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+YOUTUBE_LINK.split('/')[3]+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
 def naver_process():
     driver.get("http://naver.com/")
@@ -139,14 +142,14 @@ def dct_process():
     category_select.select_by_visible_text("foreign")
 
     title_field = driver.find_element_by_class_name('post_input')
-    title_field.send_keys("테스트")
+    title_field.send_keys(FULL_TITLE)
 
     iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
 
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body')
-    editor.send_keys('test')
+    editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
     
@@ -198,22 +201,14 @@ def hiphople_process():
     category_select = Select(driver.find_element_by_id("category"))
     category_select.select_by_visible_text("음악")
 
-    text = open("D:\\T.K.C\\take knowledge's choice.txt", 'rt', encoding='UTF8')
-
-
-    list = text.read().split('\\')
-
-    for text in list:
-        print(text)
-
     title_field = driver.find_element_by_xpath("//*[@id=\"gap\"]/div/div/form/div[2]/div[2]/input")
-    title_field.send_keys("FULL_TITLE")
+    title_field.send_keys(FULL_TITLE)
 
     html_code_button = driver.find_element_by_id('cke_40')
     html_code_button.click()
 
     html_editor = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/textarea')
-    html_editor.send_keys("IFRAME_LINK")
+    html_editor.send_keys(IFRAME_LINK)
 
     disable_code = driver.find_element_by_xpath('//*[@id="cke_40"]')
     disable_code.click()
@@ -222,8 +217,7 @@ def hiphople_process():
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body/p')
-    editor.send_keys("COMMENT")
-    editor.send_keys("LINK")
+    editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
     html_code_button.click()
@@ -267,7 +261,7 @@ def o_u_process():
         driver.quit()
 
     title_field = driver.find_element_by_id('subject')
-    title_field.send_keys('test')
+    title_field.send_keys(FULL_TITLE)
 
     html_switch_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div[2]/div[2]/div[6]/div[2]')
     html_switch_button.click()
@@ -276,16 +270,7 @@ def o_u_process():
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body/p')
-
-
-
-    editor.send_keys('test')
-    editor.send_keys("\n")
-    editor.send_keys('test')
-    editor.send_keys("\n")
-    editor.send_keys('test')
-    editor.send_keys("\n")
-    editor.send_keys('test')
+    editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
 
