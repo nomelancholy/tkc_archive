@@ -253,29 +253,25 @@ def o_u_process():
 
     driver.get("http://www.todayhumor.co.kr/board/write.php?table=music")
 
+    title_field = driver.find_element_by_id('subject')
+    title_field.send_keys(FULL_TITLE)
+
     try:
         element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.ID, 'subject'))
+            EC.presence_of_element_located((By.CLASS_NAME, 'cheditor-editarea'))
         )
     except:
         driver.quit()
 
-    title_field = driver.find_element_by_id('subject')
-    title_field.send_keys(FULL_TITLE)
 
-    # iframe = driver.find_element_by_class_name('cheditor-editarea')
-    iframe = driver.find_element_by_tag_name('iframe')
+    iframe = driver.find_element_by_class_name('cheditor-editarea')
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body/p')
     editor.send_keys(CONTENT)
 
-    # ref : https://stackoverflow.com/questions/18924146/selenium-and-iframe-in-html
-
     # frame_change_button = driver.find_element_by_class_name('cheditor-tab-code-off')
     # frame_change_button.click()
-
-
 
     # html_switch_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div[2]/div[2]/div[6]/div[2]')
     # html_switch_button.click()
