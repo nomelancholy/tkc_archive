@@ -258,25 +258,48 @@ def o_u_process():
 
     try:
         element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'cheditor-tab-code-off'))
+        )
+    except:
+        driver.quit()
+
+    frame_change_to_html_button = driver.find_element_by_class_name('cheditor-tab-code-off')
+    frame_change_to_html_button.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'cheditor-editarea-text-content'))
+        )
+    except:
+        driver.quit()
+
+    html_area = driver.find_element_by_class_name('cheditor-editarea-text-content')
+    html_area.send_keys(IFRAME_LINK)
+
+    frame_change_to_editor_button = driver.find_element_by_class_name('cheditor-tab-rich-off')
+    frame_change_to_editor_button.click()
+
+    time.sleep(2)
+
+    try:
+        element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'cheditor-editarea'))
         )
     except:
         driver.quit()
 
-
     iframe = driver.find_element_by_class_name('cheditor-editarea')
     driver.switch_to.frame(iframe)
 
-    editor = driver.find_element_by_xpath('/html/body/p')
-    editor.send_keys(CONTENT)
-
-    # frame_change_button = driver.find_element_by_class_name('cheditor-tab-code-off')
-    # frame_change_button.click()
+    editor = driver.find_element_by_xpath('/html/body')
+    # editor.send_keys(Keys.ENTER)
+    # webdriver.ActionChains(driver).key_down(Keys.ARROW_UP).key_down(Keys.ARROW_DOWN).key_down(Keys.ARROW_DOWN).key_down(Keys.ARROW_DOWN).perform()
+    # editor.send_keys(CONTENT)
 
     # html_switch_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div[2]/div[2]/div[6]/div[2]')
     # html_switch_button.click()
 
-    driver.switch_to.default_content()
+    # driver.switch_to.default_content()
 
 # naver_process()
 # dct_process()
