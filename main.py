@@ -16,6 +16,15 @@ load_dotenv(find_dotenv())
 
 text = open("D:\\T.K.C\\take knowledge's choice.txt", 'rt', encoding='UTF8')
 
+line_list = []
+
+while True:
+    line = text.readline()
+    line_list.append(line)
+    if not line: break
+
+print(line_list)
+
 list = text.read().split('\\')
 
 FULL_TITLE = list[0][:-1]
@@ -276,6 +285,8 @@ def o_u_process():
     html_area = driver.find_element_by_class_name('cheditor-editarea-text-content')
     html_area.send_keys(IFRAME_LINK)
     html_area.send_keys('<P>'+CONTENT+'</p>')
+
+    print(CONTENT)
 
     frame_change_to_editor_button = driver.find_element_by_class_name('cheditor-tab-rich-off')
     frame_change_to_editor_button.click()
