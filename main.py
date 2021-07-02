@@ -275,11 +275,10 @@ def o_u_process():
 
     html_area = driver.find_element_by_class_name('cheditor-editarea-text-content')
     html_area.send_keys(IFRAME_LINK)
+    html_area.send_keys('<P>'+CONTENT+'</p>')
 
     frame_change_to_editor_button = driver.find_element_by_class_name('cheditor-tab-rich-off')
     frame_change_to_editor_button.click()
-
-    time.sleep(2)
 
     try:
         element = WebDriverWait(driver, 5).until(
@@ -292,9 +291,23 @@ def o_u_process():
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body')
+    # editor.send_keys(" ")
     # editor.send_keys(Keys.ENTER)
-    # webdriver.ActionChains(driver).key_down(Keys.ARROW_UP).key_down(Keys.ARROW_DOWN).key_down(Keys.ARROW_DOWN).key_down(Keys.ARROW_DOWN).perform()
+    # editor.send_keys(" ")
+    #
+    # time.sleep(2)
+    #
+    # for i in range(10):
+    #     editor.send_keys(Keys.END)
+    #
+    #
+    # for i in range(10):
+    #     editor.send_keys(Keys.ARROW_DOWN)
+    #
+    # editor.send_keys(Keys.ENTER)
+
     # editor.send_keys(CONTENT)
+
 
     # html_switch_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div[2]/div[2]/div[6]/div[2]')
     # html_switch_button.click()
