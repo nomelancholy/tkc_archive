@@ -11,20 +11,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 
+# chrome driver setup
 driver = webdriver.Chrome()
 load_dotenv(find_dotenv())
 
+# find text file
 text = open("D:\\T.K.C\\take knowledge's choice.txt", 'rt', encoding='UTF8')
 
-line_list = []
-
-while True:
-    line = text.readline()
-    line_list.append(line)
-    if not line: break
-
-print(line_list)
-
+# read text file and split based on \
 list = text.read().split('\\')
 
 FULL_TITLE = list[0][:-1]
@@ -32,6 +26,18 @@ TITLE = FULL_TITLE.split('.', maxsplit=1)[1][:-1]
 CONTENT = list[1][:-1]
 YOUTUBE_LINK = list[2][:-1]
 IFRAME_LINK = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+YOUTUBE_LINK.split('/')[3]+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+
+split_content = CONTENT.split('\n')
+
+HTML_CONTENT = ['<p>'+line+'</p>' for line in split_content]
+# line_list = []
+#
+# while True:
+#     line = text.readline()
+#     line_list.append(line)
+#     if not line: break
+#
+# print(line_list)
 
 def naver_process():
     driver.get("http://naver.com/")
@@ -284,9 +290,7 @@ def o_u_process():
 
     html_area = driver.find_element_by_class_name('cheditor-editarea-text-content')
     html_area.send_keys(IFRAME_LINK)
-    html_area.send_keys('<P>'+CONTENT+'</p>')
-
-    print(CONTENT)
+    html_area.send_keys(HTML_CONTENT)
 
     frame_change_to_editor_button = driver.find_element_by_class_name('cheditor-tab-rich-off')
     frame_change_to_editor_button.click()
