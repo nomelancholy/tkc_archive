@@ -23,21 +23,13 @@ list = text.read().split('\\')
 
 FULL_TITLE = list[0][:-1]
 TITLE = FULL_TITLE.split('.', maxsplit=1)[1][:-1]
+
 CONTENT = list[1][:-1]
+split_content = CONTENT.split('\n')
+HTML_CONTENT = ['<br />' if line == '' else "<p>"+line+"</p>" for line in split_content]
+
 YOUTUBE_LINK = list[2][:-1]
 IFRAME_LINK = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+YOUTUBE_LINK.split('/')[3]+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-
-split_content = CONTENT.split('\n')
-
-HTML_CONTENT = ['<p>'+line+'</p>' for line in split_content]
-# line_list = []
-#
-# while True:
-#     line = text.readline()
-#     line_list.append(line)
-#     if not line: break
-#
-# print(line_list)
 
 def naver_process():
     driver.get("http://naver.com/")
@@ -295,43 +287,13 @@ def o_u_process():
     frame_change_to_editor_button = driver.find_element_by_class_name('cheditor-tab-rich-off')
     frame_change_to_editor_button.click()
 
-    try:
-        element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'cheditor-editarea'))
-        )
-    except:
-        driver.quit()
-
-    iframe = driver.find_element_by_class_name('cheditor-editarea')
-    driver.switch_to.frame(iframe)
-
-    editor = driver.find_element_by_xpath('/html/body')
-    # editor.send_keys(" ")
-    # editor.send_keys(Keys.ENTER)
-    # editor.send_keys(" ")
-    #
-    # time.sleep(2)
-    #
-    # for i in range(10):
-    #     editor.send_keys(Keys.END)
-    #
-    #
-    # for i in range(10):
-    #     editor.send_keys(Keys.ARROW_DOWN)
-    #
-    # editor.send_keys(Keys.ENTER)
-
-    # editor.send_keys(CONTENT)
-
-
-    # html_switch_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div[2]/div[2]/div[6]/div[2]')
-    # html_switch_button.click()
-
-    # driver.switch_to.default_content()
+    submit_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[8]/td/div/input')
+    submit_button.click()
 
 # naver_process()
 # dct_process()
+# clear
 # hiphople_process()
-o_u_process()
+# o_u_process()
 
 
