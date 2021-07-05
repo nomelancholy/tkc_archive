@@ -148,17 +148,26 @@ def dct_process():
     category_select = Select(driver.find_element_by_xpath('//*[@id="post"]/form/div[1]/select'))
     category_select.select_by_visible_text("foreign")
 
+    link_field = driver.find_element_by_xpath('//*[@id="post"]/form/div[8]/input')
+    link_field.send_keys(YOUTUBE_LINK)
+
     title_field = driver.find_element_by_class_name('post_input')
     title_field.send_keys(FULL_TITLE)
 
     iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
-
     driver.switch_to.frame(iframe)
 
     editor = driver.find_element_by_xpath('/html/body')
     editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
+
+
+
+    # time.sleep(2)
+    #
+    # upload_button = driver.find_element_by_xpath('//*[@id="delete"]')
+    # upload_button.click()
     
 def hiphople_process():
     driver.get("https://hiphople.com/")
@@ -291,7 +300,7 @@ def o_u_process():
     submit_button.click()
 
 # naver_process()
-# dct_process()
+dct_process()
 # clear
 # hiphople_process()
 # o_u_process()
