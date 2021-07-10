@@ -114,9 +114,16 @@ def naver_process():
 
     driver.get('https://cafe.naver.com/ca-fe/cafes/14371899/menus/571/articles/write?boardType=L')
 
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'textarea_input'))
+        )
+    except:
+        driver.quit()
+
     cafe_title_field = driver.find_element_by_class_name('textarea_input')
     cafe_title_field.click()
-    cafe_title_field.send_keys('test')
+    cafe_title_field.send_keys(FULL_TITLE)
 
 def dct_process():
     driver.get("https://dctribe.com/")
@@ -299,8 +306,8 @@ def o_u_process():
     submit_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[8]/td/div/input')
     submit_button.click()
 
-# naver_process()
-dct_process()
+naver_process()
+# dct_process()
 # clear
 # hiphople_process()
 # o_u_process()
