@@ -21,8 +21,14 @@ text = open("D:\\T.K.C\\take knowledge's choice.txt", 'rt', encoding='UTF8')
 # read text file and split based on \
 list = text.read().split('\\')
 
+# Take Knowledge's Choice #1832. J. Rawls - Blue #2 (2001) \
 FULL_TITLE = list[0][:-1]
-TITLE = FULL_TITLE.split('.', maxsplit=1)[1][:-1]
+split_title = FULL_TITLE.split('.', maxsplit=1)
+# Take Knowledge's Choice #1832
+TKC_INDEX = split_title[0]
+# J. Rawls - Blue #2 (2001)
+TITLE = split_title[1].lstrip()
+
 
 CONTENT = list[1][:-1]
 split_content = CONTENT.split('\n')
@@ -306,7 +312,7 @@ def o_u_process():
     submit_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[8]/td/div/input')
     submit_button.click()
 
-naver_process()
+# naver_process()
 # dct_process()
 # clear
 # hiphople_process()
