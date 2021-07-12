@@ -25,7 +25,7 @@ list = text.read().split('\\')
 FULL_TITLE = list[0][:-1]
 split_title = FULL_TITLE.split('.', maxsplit=1)
 # Take Knowledge's Choice #1832
-TKC_INDEX = split_title[0]
+INDEX_TITLE = split_title[0]
 # J. Rawls - Blue #2 (2001)
 TITLE = split_title[1].lstrip()
 
@@ -161,9 +161,6 @@ def dct_process():
     category_select = Select(driver.find_element_by_xpath('//*[@id="post"]/form/div[1]/select'))
     category_select.select_by_visible_text("foreign")
 
-    link_field = driver.find_element_by_xpath('//*[@id="post"]/form/div[8]/input')
-    link_field.send_keys(YOUTUBE_LINK)
-
     title_field = driver.find_element_by_class_name('post_input')
     title_field.send_keys(FULL_TITLE)
 
@@ -174,7 +171,9 @@ def dct_process():
     editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
-
+    #
+    # link_field = driver.find_element_by_xpath('//*[@id="post"]/form/div[8]/input')
+    # link_field.send_keys(YOUTUBE_LINK)
 
 
     # time.sleep(2)
@@ -283,7 +282,7 @@ def o_u_process():
     driver.get("http://www.todayhumor.co.kr/board/write.php?table=music")
 
     title_field = driver.find_element_by_id('subject')
-    title_field.send_keys(FULL_TITLE)
+    title_field.send_keys(INDEX_TITLE)
 
     try:
         element = WebDriverWait(driver, 5).until(
@@ -313,7 +312,7 @@ def o_u_process():
     submit_button.click()
 
 # naver_process()
-# dct_process()
+dct_process()
 # clear
 # hiphople_process()
 # o_u_process()
