@@ -310,11 +310,12 @@ def o_u_process():
 
     submit_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[8]/td/div/input')
     submit_button.click()
+def incheon_nation():
+    driver.get('https://incheonation.kr/')
 
 # naver_process()
 dct_process()
-# clear
 # hiphople_process()
 # o_u_process()
-
+# incheon_nation()
 
