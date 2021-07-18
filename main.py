@@ -312,10 +312,13 @@ def o_u_process():
     submit_button.click()
 def incheon_nation():
     driver.get('https://incheonation.kr/')
+    title_field = driver.find_element_by_class_name('bt_login')
+    title_field.click()
+
 
 # naver_process()
-dct_process()
+# dct_process()
 # hiphople_process()
 # o_u_process()
-# incheon_nation()
+incheon_nation()
 
