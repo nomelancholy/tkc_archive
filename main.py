@@ -318,6 +318,15 @@ def incheon_nation():
     INCHEON_ID = os.environ.get("INCHEON_ID")
     INCHEON_PW = os.environ.get("INCHEON_PW")
 
+    id_field = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[1]/input[1]')
+    pw_field = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[1]/input[2]')
+
+    id_field.send_keys(INCHEON_ID)
+    pw_field.send_keys(INCHEON_PW)
+
+    login_button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[2]/button[2]')
+    login_button.click()
+
 # naver_process()
 # dct_process()
 # hiphople_process()
