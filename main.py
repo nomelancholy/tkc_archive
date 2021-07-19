@@ -312,9 +312,11 @@ def o_u_process():
     submit_button.click()
 def incheon_nation():
     driver.get('https://incheonation.kr/')
-    title_field = driver.find_element_by_class_name('bt_login')
-    title_field.click()
+    login_field = driver.find_element_by_class_name('bt_login')
+    login_field.click()
 
+    INCHEON_ID = os.environ.get("INCHEON_ID")
+    INCHEON_PW = os.environ.get("INCHEON_PW")
 
 # naver_process()
 # dct_process()
