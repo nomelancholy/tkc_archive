@@ -312,6 +312,14 @@ def o_u_process():
     submit_button.click()
 def incheon_nation():
     driver.get('https://incheonation.kr/')
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'bt_login'))
+        )
+    except:
+        driver.quit()
+
     login_field = driver.find_element_by_class_name('bt_login')
     login_field.click()
 
