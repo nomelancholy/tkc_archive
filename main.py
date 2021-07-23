@@ -313,13 +313,6 @@ def o_u_process():
 def incheon_nation():
     driver.get('https://incheonation.kr/')
 
-    try:
-        element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'bt_login'))
-        )
-    except:
-        driver.quit()
-
     login_field = driver.find_element_by_class_name('bt_login')
     login_field.click()
 
@@ -334,6 +327,19 @@ def incheon_nation():
 
     login_button = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[2]/button[2]')
     login_button.click()
+
+    driver.get("https://incheonation.kr/attendance")
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="click_button"]/span/button'))
+        )
+    except:
+        driver.quit()
+
+    attend_button = driver.find_element_by_xpath('//*[@id="click_button"]/span/button')
+    attend_button.click()
+
 
 # naver_process()
 # dct_process()
