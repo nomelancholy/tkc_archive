@@ -313,11 +313,27 @@ def o_u_process():
 def incheon_nation():
     driver.get('https://incheonation.kr/')
 
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'bt_login'))
+        )
+    except:
+        driver.quit()
+
+
     login_field = driver.find_element_by_class_name('bt_login')
     login_field.click()
 
     INCHEON_ID = os.environ.get("INCHEON_ID")
     INCHEON_PW = os.environ.get("INCHEON_PW")
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[3]/div/form/div[1]/input[1]'))
+        )
+    except:
+        driver.quit()
+
 
     id_field = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[1]/input[1]')
     pw_field = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[1]/input[2]')
