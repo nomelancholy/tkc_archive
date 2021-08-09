@@ -131,6 +131,8 @@ def naver_process():
     cafe_title_field.click()
     cafe_title_field.send_keys(FULL_TITLE)
 
+
+
 def dct_process():
     driver.get("https://dctribe.com/")
 
@@ -310,6 +312,7 @@ def o_u_process():
 
     submit_button = driver.find_element_by_xpath('//*[@id="write_form"]/table/tbody/tr[2]/td/table/tbody/tr[8]/td/div/input')
     submit_button.click()
+
 def incheon_nation():
     driver.get('https://incheonation.kr/')
 
@@ -320,19 +323,11 @@ def incheon_nation():
     except:
         driver.quit()
 
-
     login_field = driver.find_element_by_class_name('bt_login')
     login_field.click()
 
     INCHEON_ID = os.environ.get("INCHEON_ID")
     INCHEON_PW = os.environ.get("INCHEON_PW")
-
-    try:
-        element = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[3]/div/form/div[1]/input[1]'))
-        )
-    except:
-        driver.quit()
 
 
     id_field = driver.find_element_by_xpath('/html/body/div[1]/div[3]/div/form/div[1]/input[1]')
@@ -357,9 +352,9 @@ def incheon_nation():
     attend_button.click()
 
 
-# naver_process()
+naver_process()
 # dct_process()
 # hiphople_process()
 # o_u_process()
-incheon_nation()
+# incheon_nation()
 
