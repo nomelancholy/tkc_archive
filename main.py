@@ -131,6 +131,18 @@ def naver_process():
     cafe_title_field.click()
     cafe_title_field.send_keys(FULL_TITLE)
 
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'se-text-paragraph'))
+        )
+    except:
+        driver.quit()
+
+    cafe_content_field = driver.find_element_by_class_name("se-text-paragraph")
+    # cafe_content_field = driver.find_element_by_xpath("//div[@class='se-content']//following::span[@class='se-placeholder']")
+
+    cafe_content_field.click()
+    cafe_content_field.send_keys('test')
 
 
 def dct_process():
