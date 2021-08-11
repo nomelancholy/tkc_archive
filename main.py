@@ -83,34 +83,34 @@ def naver_process():
         )
     except:
         driver.quit()
-    #
-    # driver.get('https://blog.naver.com/starmekey/postwrite')
-    #
-    # try:
-    #     element = WebDriverWait(driver, 5).until(
-    #         EC.presence_of_element_located((By.CLASS_NAME, 'se-help-panel-close-button'))
-    #     )
-    # except:
-    #     driver.quit()
-    #
-    # time.sleep(2)
-    #
-    # popup_close_button = driver.find_element_by_class_name('se-help-panel-close-button')
-    # popup_close_button.click()
-    #
-    # try:
-    #     element = WebDriverWait(driver, 5).until(
-    #         EC.presence_of_element_located((By.ID, 'SE-07f5820a-3947-4e98-97dd-cfce58671d43'))
-    #     )
-    # except:
-    #     driver.quit()
 
-    # time.sleep(3)
+    driver.get('https://blog.naver.com/starmekey/postwrite')
 
-    # driver.execute_script("document.getElementsById('SE-07f5820a-3947-4e98-97dd-cfce58671d43')[0].value=\'"+'테스트'+"\'")
-    # title_field = driver.find_element_by_id('SE-07f5820a-3947-4e98-97dd-cfce58671d43')
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'se-help-panel-close-button'))
+        )
+    except:
+        driver.quit()
 
-    # title_field.send_keys('자동화 귀찮다')
+    time.sleep(2)
+
+    popup_close_button = driver.find_element_by_class_name('se-help-panel-close-button')
+    popup_close_button.click()
+
+    try:
+        element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, 'SE-07f5820a-3947-4e98-97dd-cfce58671d43'))
+        )
+    except:
+        driver.quit()
+
+    time.sleep(3)
+
+    driver.execute_script("document.getElementsById('SE-07f5820a-3947-4e98-97dd-cfce58671d43')[0].value=\'"+'테스트'+"\'")
+    title_field = driver.find_element_by_id('SE-07f5820a-3947-4e98-97dd-cfce58671d43')
+
+    title_field.send_keys(FULL_TITLE)
 
     # driver.get('https://cafe.naver.com/rapsup')
     #
