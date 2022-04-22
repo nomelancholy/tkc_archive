@@ -1,5 +1,5 @@
 """
-ASGI config for tkc_automation project.
+ASGI config for tkc_archive project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tkc_automation.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tkc_archive.settings')
 
 application = get_asgi_application()
