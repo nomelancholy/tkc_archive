@@ -22,20 +22,21 @@ load_dotenv(find_dotenv())
 # list = text.read().split('\\')
 
 # Take Knowledge's Choice #1832. J. Rawls - Blue #2 (2001) \
-FULL_TITLE = "Take Knowledge's Choice #1912. Abstract Rude + Tribe Unique - M-A-Double S (2001)"
+FULL_TITLE = "Take Knowledge's Choice #1913. All Natural - Elements of Style (2001)"
 split_title = FULL_TITLE.split('.', maxsplit=1)
 # Take Knowledge's Choice #1832
 INDEX_TITLE = split_title[0]
 # J. Rawls - Blue #2 (2001)
 TITLE = split_title[1].lstrip()
 
-
-CONTENT = "Abstract Rude + Tribe Unique의 2001년 작 \n M-A-Double S입니다 \n \n 즐감하세요! \n \n 그간 올린 곡들은 블로그와 \n 네이버 카페 '랩잡'의 'Take Knowledge' 카테고리에서도 만나 보실 수 있습니다. \n  \n http://blog.naver.com/starmekey \n https://cafe.naver.com/rapsup"
+CONTENT = "All Natural의 2001년 작 \n Elements of Style입니다 \n \n 즐감하세요! \n \n 그간 올린 곡들은 블로그와 \n 네이버 카페 '랩잡'의 'Take Knowledge' 카테고리에서도 만나 보실 수 있습니다. \n  \n http://blog.naver.com/starmekey \n https://cafe.naver.com/rapsup"
 
 split_content = CONTENT.split('\n')
 HTML_CONTENT = ['<br />' if line == '' else "<p>"+line+"</p>" for line in split_content]
 
-YOUTUBE_LINK = 'https://youtu.be/yhhQyNIxBzU'
+LINK_TYPE = 'audio'
+
+YOUTUBE_LINK = 'https://youtu.be/h8rxXGoByy8'
 IFRAME_LINK = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+YOUTUBE_LINK.split('/')[3]+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
 def naver_process():
@@ -152,13 +153,16 @@ def dct_process():
     DCT_ID = os.environ.get("DCT_ID")
     DCT_PW = os.environ.get("DCT_PW")
 
-    id_field = driver.find_element_by_id("user_id")
+    # id_field = driver.find_element_by_id("user_id")
+    id_field = driver.find_element(by=By.ID, value="user_id")
     id_field.send_keys(DCT_ID)
 
-    pw_field = driver.find_element_by_id("passwd")
+    # pw_field = driver.find_element_by_id("passwd")
+    pw_field = driver.find_element(by=By.ID, value="passwd")
     pw_field.send_keys(DCT_PW)
 
-    login_button = driver.find_element_by_xpath('//*[@id="login"]/form/div[3]/input')
+    # login_button = driver.find_element_by_xpath('//*[@id="login"]/form/div[3]/input')
+    login_button = driver.find_element(by=By.XPATH, value='//*[@id="login"]/form/div[3]/input')
     login_button.click()
 
     try:
@@ -168,33 +172,41 @@ def dct_process():
     except:
         driver.quit()
 
-    driver.get("https://dctribe.com/0/zboard.php?id=audio")
+    if LINK_TYPE == 'audio':
+        driver.get("https://dctribe.com/0/zboard.php?id=audio")
+    elif LINK_TYPE == 'video':
+        driver.get("https://dctribe.com/0/zboard.php?id=video")
 
-    write_button = driver.find_element_by_xpath('//*[@id="bottom"]/div[2]/a')
+    # write_button = driver.find_element_by_xpath('//*[@id="bottom"]/div[2]/a')
+    write_button = driver.find_element(by=By.XPATH, value='//*[@id="bottom"]/div[2]/a')
     write_button.click()
 
-    category_select = Select(driver.find_element_by_xpath('//*[@id="post"]/form/div[1]/select'))
+    # category_select = Select(driver.find_element_by_xpath('//*[@id="post"]/form/div[1]/select'))
+    category_select = Select(driver.find_element(by=By.XPATH, value='//*[@id="post"]/form/div[1]/select'))
     category_select.select_by_visible_text("foreign")
 
-    title_field = driver.find_element_by_class_name('post_input')
+    # title_field = driver.find_element_by_class_name('post_input')
+    title_field = driver.find_element(by=By.CLASS_NAME, value='post_input')
     title_field.send_keys(FULL_TITLE)
 
-    iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
+    # iframe = driver.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe')
+    iframe = driver.find_element(by=By.XPATH, value='//*[@id="cke_1_contents"]/iframe')
     driver.switch_to.frame(iframe)
 
-    editor = driver.find_element_by_xpath('/html/body')
+    # editor = driver.find_element_by_xpath('/html/body')
+    editor = driver.find_element(by=By.XPATH, value='/html/body')
     editor.send_keys(CONTENT)
 
     driver.switch_to.default_content()
     #
     # link_field = driver.find_element_by_xpath('//*[@id="post"]/form/div[8]/input')
-    # link_field.send_keys(YOUTUBE_LINK)
+    link_field = driver.find_element(by=By.XPATH, value='//*[@id="post"]/form/div[8]/input')
+    link_field.send_keys(YOUTUBE_LINK)
 
-
-    # time.sleep(2)
+    time.sleep(2)
     #
-    # upload_button = driver.find_element_by_xpath('//*[@id="delete"]')
-    # upload_button.click()
+    upload_button = driver.find_element(by=By.XPATH, value='//*[@id="delete"]')
+    upload_button.click()
     
 def hiphople_process():
     driver.get("https://hiphople.com/")
@@ -350,7 +362,7 @@ def o_u_process():
     submit_button.click()
 
 # naver_process()
-# dct_process()
-hiphople_process()
+dct_process()
+# hiphople_process()
 # o_u_process()
 
